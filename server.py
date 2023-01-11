@@ -62,7 +62,7 @@ async def handler(websocket, path):
             c = msg[1][0]
             point = str(territory[row][column])
             score_l, score_r = cal_score(territory)
-            await color(r + "#" + c + "#" + point + "#" + "clickOn" + "#" + score_l + "#" + score_r)
+            await attack(r + "#" + c + "#" + point + "#" + "clickOn" + "#" + score_l + "#" + score_r)
         elif msg[0] == "stop":
             score_l, score_r = cal_score(territory)
             winner = 0
@@ -73,10 +73,11 @@ async def handler(websocket, path):
             score_l = str(score_l)
             score_r = str(score_r)
             winner = str(winner)
-            await color(score_l + "#" + score_r + "#" + winner + "#" + "end")
+            await attack(score_l + "#" + score_r + "#" + winner + "#" + "end")
         elif msg[0] == "out":
             players = []
             territory = [[0 for i in range(5)] for j in range(5)]
+
             await broadcast_click("0" + "#prepare")
 
 
@@ -103,7 +104,7 @@ async def broadcast(msg):
                 clients.remove(websock)
 
 
-async def color(msg):
+async def attack(msg):
     print(msg, 'color')
     for websock in players:
         try:
@@ -117,6 +118,6 @@ async def color(msg):
 loop = asyncio.new_event_loop()  # get an event loop
 asyncio.set_event_loop(loop)  # set the event loop to asyncio
 loop.run_until_complete(
-    websockets.serve(handler, 'localhost', 4545)  # setup the websocket service and handler
+    websockets.serve(handler, 'localhost', 8787)  # setup the websocket service and handler
 )  # hook to localhost:4545
 loop.run_forever()  # keep it running

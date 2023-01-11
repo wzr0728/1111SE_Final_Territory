@@ -132,7 +132,7 @@
                 console.log(msg);
             }
             try {
-                var host = "ws://localhost:4545/"; //設定socker server的ip:port
+                var host = "ws://localhost:8787/"; //設定socker server的ip:port
                 /*if(window.location.hostname) {
                     host = "ws://" + window.location.hostname + ":4545/";
                 }*/
@@ -195,9 +195,10 @@
                 } else {
                     if(e.data === "full"){
                         alert("對戰房間已滿，請稍候入場")
-                        number.innerHTML = "對戰房間已滿，請稍候入場"
+                        number.innerHTML = "full"
                         console.log("click down:")
                         console.log(e.data)
+
                     }else {
                         msg = e.data.split("#")
                         if (msg[1] === "prepare") {  // 更改目前房間內人數
