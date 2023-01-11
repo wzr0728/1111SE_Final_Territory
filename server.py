@@ -36,7 +36,7 @@ async def handler(websocket, path):
         if msg[0] == "play":
             if len(players) >= 2:
                 lineup.append(websocket)
-                await websocket.send("已經有人在對戰!")
+                await websocket.send("full")
             else:
                 players.append(websocket)
                 n = len(players)

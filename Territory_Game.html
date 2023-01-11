@@ -159,33 +159,33 @@
                 let msg = e.data.split("#")
                 Status = msg[3]
                 if (Status === "clickOn") {  // 點擊方格時
-                    strs = e.data.split('#');
-                    let position = strs[1] + strs[0]
-                    if (strs[2] > 0) {
+                    msgs = e.data.split('#');
+                    let position = msgs[1] + msgs[0]
+                    if (msgs[2] > 0) {
                         document.getElementById(position).style.backgroundColor = "green"
-                        document.getElementById(position).innerText = strs[2]
-                    } else if (strs[2] < 0) {
+                        document.getElementById(position).innerText = msgs[2]
+                    } else if (msgs[2] < 0) {
                         document.getElementById(position).style.backgroundColor = "orange"
-                        document.getElementById(position).innerText = -strs[2]
+                        document.getElementById(position).innerText = -msgs[2]
                     } else {
                         document.getElementById(position).style.backgroundColor = "white"
                         document.getElementById(position).innerText = "0"
                     }
                     score_l.innerText = msg[4]
                     score_r.innerText = msg[5]
-                    console.log(position + " " + strs[2] + " " + msg[4] + ":" + msg[5])
+                    console.log(position + " " + msgs[2] + " " + msg[4] + ":" + msg[5])
                 }else if (Status === "end"){
                     let winner = msg[2]
                     if (winner === "0"){
-                        final.innerHTML = "綠隊 玩家獲勝"
+                        final.innerHTML = "綠隊 玩家獲勝 5秒後自動回首頁"
                     }else if (winner === "1"){
-                        final.innerHTML = "橘隊 玩家獲勝"
+                        final.innerHTML = "橘隊 玩家獲勝 5秒後自動回首頁"
                     }else{
-                        final.innerHTML = "平手"
+                        final.innerHTML = "平手 5秒後自動回首頁"
                     }
                     let down = 5
                         let fight = setInterval(function () {
-                            down--
+                            down-=1
                             if (down <= 0) {
                                 clearInterval(fight)
                                 s.send("out")
@@ -214,7 +214,7 @@
                                 let number = 4
                                 waiting.innerHTML = "玩家已到齊，後進遊戲者為橘色"
                                 let interval = setInterval(function () {
-                                    number--
+                                    number-=1
                                     flag = 1
                                     countdown.innerText = "即將開始對戰 " + number
                                     start.style.display = "block"
@@ -226,7 +226,7 @@
                                         start.style.display = "block"
                                         count = 5 // Timer
                                         let fight = setInterval(function () {
-                                            count--
+                                            count-=1
                                             countdown_state.innerText = count
                                             if (count <= 0) {
                                                 clearInterval(fight)
