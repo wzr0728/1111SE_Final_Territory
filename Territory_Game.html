@@ -62,13 +62,14 @@
 
     <!-- ------------------------------------------------------------------------------------ -->
 
-    <div class="wrapper" id="wrapper">
-        <span id="waiting"></span>
-        <span class="countdown" id="countdown"></span>
-        <div class="start" id="start">
-            <span class="countdown_state" id="countdown_state"></span>
-            Territory 搶地遊戲<br />
-            <table border="1" width="500px" height="500px">
+    <div class="wrapper" id="wrapper" align='center' valign="middle">
+        遊戲狀態：<span id="waiting" align='center' valign="middle"></span></br>
+        <span class="countdown" id="countdown" align='center' valign="middle"></span>
+        <h1>     Territory 搶地遊戲  </h1>
+        <div class="start" id="start" align='center' valign="middle">
+            遊戲剩餘時間：<span class="countdown_state" id="countdown_state" align='center' valign="middle"></span></p>
+            綠隊分數:<span id="count_l">0</span>  橘隊分數  <span id="count_r">0</span>
+            <table border="1" width="500px" height="500px" align='center' valign="middle">
                 <tr>
                     <td class='cell' id='00' align='center' valign="middle">0</td>
                     <td class='cell' id='10' align='center' valign="middle">0</td>
@@ -194,11 +195,11 @@
                 } else {
                     if(e.data === "full"){
                         alert("對戰房間已滿，請稍候入場")
-                        number.innerHTML = e.data
+                        number.innerHTML = "對戰房間已滿，請稍候入場"
                         console.log("click down:")
                         console.log(e.data)
                     }else {
-                        msg = e.data.split("###")
+                        msg = e.data.split("#")
                         if (msg[1] === "prepare") {  // 更改目前房間內人數
                             console.log(msg[1])
                             number.innerHTML = msg[0]
@@ -209,7 +210,7 @@
                             wrapper.style.display = "block"
                             waiting.innerHTML = "等待玩家到齊，你的顏色為綠色"
                             console.log(e.data)
-                            if (e.data === 2) {  // 人數到齊
+                            if (msg[0] === '2') {  // 人數到齊
                                 let number = 4
                                 waiting.innerHTML = "玩家已到齊，後進遊戲者為橘色"
                                 let interval = setInterval(function () {
@@ -231,7 +232,7 @@
                                                 clearInterval(fight)
                                                 waiting.innerHTML = "對戰結束"
                                                 flag = 1
-                                                s.send("stop###")
+                                                s.send("stop#")
                                             }
                                         }, 1000)
                                     }
@@ -248,7 +249,7 @@
                 id = this.id;
                 console.log(id)
                 if (flag == 0) {
-                    s.send("clickOn###" + id)
+                    s.send("clickOn#" + id)
                 }
             }
         });
